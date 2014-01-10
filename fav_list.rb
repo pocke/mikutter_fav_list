@@ -11,7 +11,7 @@ Plugin.create(:fav_list) do
   end
 
   on_favorite do |service, user, msg|
-    break unless service.user == user.to_s
+    next unless service.user == user.to_s
     (Service.primary.twitter/'lists/members/create').json(
       slug: UserConfig[:fav_list_name],
       owner_screen_name: service.user,
